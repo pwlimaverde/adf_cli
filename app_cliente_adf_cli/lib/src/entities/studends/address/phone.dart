@@ -2,7 +2,7 @@ import 'dart:convert';
 
 final class Phone {
   final int ddd;
-  final int phone;
+  final String phone;
   Phone({
     required this.ddd,
     required this.phone,
@@ -19,8 +19,8 @@ final class Phone {
 
   factory Phone.fromMap(Map<String, dynamic> map) {
     return Phone(
-      ddd: map['ddd'],
-      phone: map['phone'],
+      ddd: map['ddd']??0,
+      phone: map['phone']??'',
     );
   }
 

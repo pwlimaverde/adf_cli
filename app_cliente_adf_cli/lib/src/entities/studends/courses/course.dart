@@ -24,7 +24,7 @@ final class Course {
     return Course(
       id: map['id'] ?? 0,
       name: map['name'] ?? '',
-      isStudent: map['isStudent'] ?? '',
+      isStudent: map['isStudent'] ?? false,
     );
   }
 
