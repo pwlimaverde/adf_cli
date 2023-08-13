@@ -96,4 +96,6 @@ final class Students {
       address: map['address'],
     );
   }
+
+  factory Students.fromJson(String json)=> Students.fromMap(jsonDecode(json));
 }
