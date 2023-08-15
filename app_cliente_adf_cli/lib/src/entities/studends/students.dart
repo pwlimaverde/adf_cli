@@ -6,7 +6,7 @@ import 'courses/course.dart';
 final class Students {
   final int? id;
   final String name;
-  final String? age;
+  final int? age;
   final List<String> nameCourses;
   final List<Course> courses;
   final Address address;
@@ -38,10 +38,11 @@ final class Students {
   String toJson() => jsonEncode(toMap());
 
   factory Students.fromMap(Map<String, dynamic> map) {
-    return Students(
+ 
+    final model = Students(
       id: map['id'] ?? 0,
       name: map['name'] ?? '',
-      age: map['age'],
+      age: map['age']??0,
       nameCourses: List<String>.from(map['nameCourses'] ?? <String>[]),
       courses: map['courses']
               ?.map<Course>((course) => Course.fromMap(course))
@@ -49,6 +50,7 @@ final class Students {
           <Course>[],
       address: Address.fromMap(map['address'] ?? <String, dynamic>{}),
     );
+    return model;
   }
 
   factory Students.fromJson(String json) => Students.fromMap(jsonDecode(json));

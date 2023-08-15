@@ -10,3 +10,14 @@ final class ParametrosCarregarProductByName implements ParametersReturnResult {
     required this.basic,
   });
 }
+
+final class ParametrosStudentFindById implements ParametersReturnResult {
+  final int id;
+  @override
+  final ParametersBasic basic;
+
+  ParametrosStudentFindById({
+    required this.id,
+    required this.basic,
+  });
+}
