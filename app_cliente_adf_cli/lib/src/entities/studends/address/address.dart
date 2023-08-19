@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:return_success_or_error/return_success_or_error.dart';
+
 import 'city.dart';
 import 'phone.dart';
 
@@ -30,13 +32,23 @@ final class Address {
   String toJson() => jsonEncode(toMap());
 
   factory Address.fromMap(Map<String, dynamic> map) {
-    return Address(
-      street: map['street']??'',
-      number: map['number']??0,
-      zipCode: map['zipCode']??'',
-      city: City.fromMap(map['city']??<String, dynamic>{}),
-      phone: Phone.fromMap(map['phone']??<String, dynamic>{}),
-    );
+    return switch (map) {
+      {
+        'street': String street,
+        'number': int number,
+        'zipCode': String zipCode,
+        'city': Map<String, dynamic> city,
+        'phone': Map<String, dynamic> phone,
+      } =>
+        Address(
+          street: street,
+          number: number,
+          zipCode: zipCode,
+          city: City.fromMap(city),
+          phone: Phone.fromMap(phone),
+        ),
+      _ => throw ErrorGeneric(message: "Invalid Adress Map!"),
+    };
   }
 
   factory Address.fromJson(String json) => Address.fromMap(jsonDecode(json));

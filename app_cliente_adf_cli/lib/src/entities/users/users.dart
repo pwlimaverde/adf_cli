@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:return_success_or_error/return_success_or_error.dart';
+
 final class Users {
   final int id;
   final String name;
@@ -24,19 +26,22 @@ final class Users {
   String toJson() => jsonEncode(toMap());
 
   factory Users.fromMap(Map<String, dynamic> map) {
-    return Users(
-      id: map['id']??0,
-      name: map['name']??'',
-      email: map['email']??'',
-      password: map['password']??'',
-    );
+    return switch (map) {
+      {
+        'id': int id,
+        'name': String name,
+        'email': String email,
+        'password': String password,
+      } =>
+        Users(
+          id: id,
+          name: name,
+          email: email,
+          password: password,
+        ),
+        _=> throw ErrorGeneric(message: "Invalid users Map!")
+    };
   }
 
   factory Users.fromJson(String json) => Users.fromMap(jsonDecode(json));
-  
-
-  
-
-
-
 }
