@@ -14,8 +14,8 @@ Future<ReturnSuccessOrError<void>> insertStudentUsecasePresenter({
     parameters: ParametrosInsertStudent(
       json: json,
       basic: ParametersBasic(
-        error: ErrorGeneric(message: "Erro ao carregar o Student!"),
-        nameFeature: "Carregar Students By Id",
+        error: ErrorGeneric(message: "Erro ao inserir o Student!"),
+        nameFeature: "Insert Students By Id",
         showRuntimeMilliseconds: true,
         isIsolate: true,
       ),

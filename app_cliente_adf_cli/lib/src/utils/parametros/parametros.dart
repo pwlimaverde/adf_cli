@@ -1,5 +1,7 @@
 import 'package:return_success_or_error/return_success_or_error.dart';
 
+import '../../entities/studends/students.dart';
+
 final class ParametrosCarregarProductByName implements ParametersReturnResult {
   final String name;
   @override
@@ -29,6 +31,17 @@ final class ParametrosInsertStudent implements ParametersReturnResult {
 
   ParametrosInsertStudent({
     required this.json,
+    required this.basic,
+  });
+}
+
+final class ParametrosUpdateStudent implements ParametersReturnResult {
+  final Students students;
+  @override
+  final ParametersBasic basic;
+
+  ParametrosUpdateStudent({
+    required this.students,
     required this.basic,
   });
 }
