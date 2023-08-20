@@ -1,17 +1,19 @@
 import 'dart:convert';
 
+import 'package:return_success_or_error/return_success_or_error.dart';
+
 import 'address/address.dart';
 import 'courses/course.dart';
 
 final class Students {
-  final int? id;
+  final int id;
   final String name;
   final int? age;
   final List<String> nameCourses;
   final List<Course> courses;
   final Address address;
   Students({
-    this.id,
+    required this.id,
     required this.name,
     this.age,
     required this.nameCourses,
@@ -21,6 +23,7 @@ final class Students {
 
   Map<String, dynamic> toMap() {
     final map = <String, dynamic>{
+      'id': id,
       'name': name,
       'nameCourses': nameCourses,
       'courses': courses.map((course) => course.toMap()).toList(),
@@ -31,10 +34,6 @@ final class Students {
       map['age'] = age;
     }
 
-    if (id != null) {
-      map['id'] = id;
-    }
-
     return map;
   }
 
@@ -42,18 +41,24 @@ final class Students {
 
   factory Students.fromMap(Map<String, dynamic> map) {
  
-    final model = Students(
-      id: map['id'] ?? 0,
-      name: map['name'] ?? '',
-      age: map['age']??0,
-      nameCourses: List<String>.from(map['nameCourses'] ?? <String>[]),
-      courses: map['courses']
-              ?.map<Course>((course) => Course.fromMap(course))
-              .toList() ??
-          <Course>[],
-      address: Address.fromMap(map['address'] ?? <String, dynamic>{}),
-    );
-    return model;
+    return switch (map) {
+      {
+        'id': int id,
+        'name': String name,
+        'nameCourses': List nameCourses,
+        'courses': List courses,
+        'address': Map<String, dynamic> address,
+      } =>
+        Students(
+          id: id,
+          name: name,
+          age: map['age'],
+          nameCourses: List<String>.from(nameCourses),
+          courses: courses.map<Course>((course) => Course.fromMap(course)).toList(),
+          address: Address.fromMap(address),
+        ),
+        _=> throw ErrorGeneric(message: "Invalid Student Map!"),
+    };
   }
 
   factory Students.fromJson(String json) => Students.fromMap(jsonDecode(json));

@@ -1,7 +1,5 @@
 import 'package:return_success_or_error/return_success_or_error.dart';
 
-import '../../entities/studends/students.dart';
-
 final class ParametrosCarregarProductByName implements ParametersReturnResult {
   final String name;
   @override
