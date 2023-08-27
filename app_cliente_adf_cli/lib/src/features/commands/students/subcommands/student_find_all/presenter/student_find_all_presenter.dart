@@ -14,8 +14,7 @@ Future<ReturnSuccessOrError<Command>> studentFindAllPresenter() async {
   final data = await usecaseInstance(
     parameters: ParametrosCreateCommand(
       basic: ParametersBasic(
-        error: ErrorGeneric(message: "Erro ao carregar o Product!"),
-        nameFeature: "Carregar Product",
+        error: ErrorGeneric(message: "Erro ao carregar os Students!"),
       ),
       nameCommand: 'findAll',
       descriptionCommand: 'Find all Students',

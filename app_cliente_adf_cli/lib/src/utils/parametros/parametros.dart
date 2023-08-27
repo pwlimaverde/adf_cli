@@ -52,15 +52,16 @@ final class ParametrosCreateCommand implements ParametersReturnResult {
   final String descriptionCommand;
   final List<Command>? commands;
   final Function? runCommand;
+  final ({String name, String help, String abbr})? args;
   @override
   final ParametersBasic basic;
 
-    ParametrosCreateCommand({
+  ParametrosCreateCommand({
     required this.nameCommand,
     required this.descriptionCommand,
     required this.basic,
     this.commands,
-    this.runCommand
+    this.runCommand,
+    this.args,
   });
-
 }
