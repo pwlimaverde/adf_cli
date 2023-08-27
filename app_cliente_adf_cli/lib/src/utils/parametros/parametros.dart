@@ -1,3 +1,4 @@
+import 'package:args/command_runner.dart';
 import 'package:return_success_or_error/return_success_or_error.dart';
 
 import '../../entities/studends/students.dart';
@@ -44,4 +45,22 @@ final class ParametrosUpdateStudent implements ParametersReturnResult {
     required this.students,
     required this.basic,
   });
+}
+
+final class ParametrosCreateCommand implements ParametersReturnResult {
+  final String nameCommand;
+  final String descriptionCommand;
+  final List<Command>? commands;
+  final Function? runCommand;
+  @override
+  final ParametersBasic basic;
+
+    ParametrosCreateCommand({
+    required this.nameCommand,
+    required this.descriptionCommand,
+    required this.basic,
+    this.commands,
+    this.runCommand
+  });
+
 }
