@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:return_success_or_error/return_success_or_error.dart';
 
-import '../../../../../../entities/studends/students.dart';
 import '../../../../../../utils/parametros/parametros.dart';
-import '../../../../../calls_api/carregar_student_find_by_id/presenter/carregar_student_find_by_id_presenter.dart';
 import '../../../../../calls_api/insert_student/presenter/insert_student_presenter.dart';
 import '../domain/usecase/student_insert_usecase.dart';
 
@@ -36,6 +33,7 @@ void _runStudent(String? path) async {
 
   if (path != null) {
     final file = File(path).readAsStringSync();
+
     final data = await insertStudentUsecasePresenter(json: file);
 
     switch (data) {
@@ -49,6 +47,7 @@ void _runStudent(String? path) async {
         print('-------------------------------------------');
     }
   } else {
-    print("Por favor informe o path com o arquivo json com o comando --file=path ou -f path");
+    print(
+        "Por favor informe o path com o arquivo json com o comando --file=path ou -f path");
   }
 }

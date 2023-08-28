@@ -3,6 +3,7 @@ import 'package:return_success_or_error/return_success_or_error.dart';
 
 import '../../../../utils/parametros/parametros.dart';
 import '../domain/usecase/students_command_usecase.dart';
+import '../subcommands/student_delete/presenter/student_delete_presenter.dart';
 import '../subcommands/student_find_all/presenter/student_find_all_presenter.dart';
 import '../subcommands/student_find_by_id/presenter/student_find_by_id_presenter.dart';
 import '../subcommands/student_insert/presenter/student_insert_presenter.dart';
@@ -28,7 +29,7 @@ Future<ReturnSuccessOrError<Command>> studentsCommandPresenter() async {
       print(subcommandFindById.result);
   }
 
-    final subcommandInsert = await studentInsertPresenter();
+  final subcommandInsert = await studentInsertPresenter();
 
   switch (subcommandInsert) {
     case SuccessReturn<Command>():
@@ -37,6 +38,14 @@ Future<ReturnSuccessOrError<Command>> studentsCommandPresenter() async {
       print(subcommandInsert.result);
   }
 
+  final subcommandDelete = await studentDeletePresenter();
+
+  switch (subcommandDelete) {
+    case SuccessReturn<Command>():
+      commands.add(subcommandDelete.result);
+    case ErrorReturn<Command>():
+      print(subcommandDelete.result);
+  }
 
   final data = await usecaseInstance(
     parameters: ParametrosCreateCommand(
